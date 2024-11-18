@@ -14,33 +14,76 @@ class _LinksScreenState extends State<LinksScreen> {
   String selectedSection = 'none';
 
   final List<Map<String, String>> academicLinks = [
-    {'title': 'University Portal', 'url': 'https://upeisis.uofcanada.edu.eg/PowerCampusSelfService/Home/LogIn'},
-    {'title': 'Library Resources', 'url': 'https://library.youruniversity.edu'},
-    {'title': 'Quizzes', 'url': 'https://upeisis.uofcanada.edu.eg/PowerCampusSelfService/Home/LogIn'},
-    {'title': 'Helpdesk Email', 'action': 'email', 'email': 'helpdesk@uofcanada.edu.eg'},
-    {'title': 'Tutor2u', 'url': 'https://www.tutor2u.net/'},
+    {
+      'title': 'University Portal',
+      'url':
+          'https://upeisis.uofcanada.edu.eg/PowerCampusSelfService/Home/LogIn'
+    },
+    {'title': 'Library Resources', 'url': 'https://library.upei.ca/'},
+    {
+      'title': 'Quizzes',
+      'url':
+          'https://upeisis.uofcanada.edu.eg/PowerCampusSelfService/Home/LogIn'
+    },
+    {
+      'title': 'Helpdesk Email',
+      'action': 'email',
+      'email': 'helpdesk@uofcanada.edu.eg'
+    },
+    {'title': 'Tutrue', 'url': 'https://www.tutor2u.net/'},
     {'title': 'ICareer', 'url': 'https://www.instagram.com/icareer.eg/'},
-    {'title': 'Study Rooms Booking', 'url': 'https://studyroomlink.edu'},
-    {'title': 'Academic Calendar', 'url': 'https://canwellnet.sharepoint.com/sites/UCEDL/IT%20Policies%20and%20Procedures/Forms/AllItems.aspx?id=%2Fsites%2FUCEDL%2FIT%20Policies%20and%20Procedures%2FAcademic%2FUPEI%20Cairo%20Campus%20Policies%20%26%20Procedures%2FCalendar%20Dates%202024%2E07%2E17%2Epdf&parent=%2Fsites%2FUCEDL%2FIT%20Policies%20and%20Procedures%2FAcademic%2FUPEI%20Cairo%20Campus%20Policies%20%26%20Procedures&p=true&ga=1'},
-    {'title': 'Townhall', 'url': 'https://canwellnet.sharepoint.com/sites/UCEDL'},
-    {'title': 'Policies', 'url': 'https://canwellnet.sharepoint.com/sites/UCEDL/IT%20Policies%20and%20Procedures/Forms/AllItems.aspx'},
+    {
+      'title': 'Study Rooms Booking',
+      'url':
+          'https://outlook.office365.com/book/StudyRoomBooking@uofcanada.edu.eg/'
+    },
+    {
+      'title': 'Academic Calendar',
+      'url':
+          'https://canwellnet.sharepoint.com/sites/UCEDL/IT%20Policies%20and%20Procedures/Forms/AllItems.aspx?id=%2Fsites%2FUCEDL%2FIT%20Policies%20and%20Procedures%2FAcademic%2FUPEI%20Cairo%20Campus%20Policies%20%26%20Procedures%2FCalendar%20Dates%202024%2E07%2E17%2Epdf&parent=%2Fsites%2FUCEDL%2FIT%20Policies%20and%20Procedures%2FAcademic%2FUPEI%20Cairo%20Campus%20Policies%20%26%20Procedures&p=true&ga=1'
+    },
+    {
+      'title': 'Townhall',
+      'url': 'https://canwellnet.sharepoint.com/sites/UCEDL'
+    },
+    {
+      'title': 'Policies',
+      'url':
+          'https://canwellnet.sharepoint.com/sites/UCEDL/IT%20Policies%20and%20Procedures/Forms/AllItems.aspx'
+    },
   ];
 
   final List<Map<String, dynamic>> nonAcademicLinks = [
     {
       'title': 'Gym',
       'subItems': [
-        {'title': 'Yoga', 'url': 'https://gym// Ensure this class has a single responsibility.classeslink.edu/yoga'},
-        {'title': 'Boxing', 'url': 'https://gym// Ensure this class has a single responsibility.classeslink.edu/boxing'},
+        {
+          'title': 'Yoga',
+          'url':
+              'https://outlook.office365.com/book/GYMCLASSES@uofcanada.edu.eg/s/oYB9QuuJokeCGLZH09q75w2'
+        },
+        {
+          'title': 'Boxing',
+          'url':
+              'https://outlook.office365.com/owa/calendar/GYMCLASSES@uofcanada.edu.eg/bookings/s/Dh_peETTIEapfnwAEfFdOA2'
+        },
       ]
     },
-    {'title': 'Bus Routes and Schedule', 'url': 'https://bus-schedule-link.edu/Bus-Routes-Pickup-Points.pdf'},
+    {
+      'title': 'Bus Routes and Schedule',
+      'url':
+          'https://canwellnet-my.sharepoint.com/:b:/g/personal/ahmed_gad_uofcanada_edu_eg/EYlmlYbMstNEhoh613rmvxUB1UVvBm4jOu2wdO4TQNjV6Q?e=OScw56'
+    },
     {'title': 'Fleet Manager', 'action': 'call', 'phone': '01008470311'},
-    {'title': 'Location & Map', 'action': 'map', 'url': 'https://g.page/UofCanada/'},
+    {
+      'title': 'Location & Map',
+      'action': 'map',
+      'url': 'https://g.page/UofCanada/'
+    },
   ];
 
   // Ensure all async calls are awaited and error-handled.
-Future<void> _launchEmail(String email) async {
+  Future<void> _launchEmail(String email) async {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
       path: email,
@@ -49,7 +92,7 @@ Future<void> _launchEmail(String email) async {
   }
 
   // Ensure all async calls are awaited and error-handled.
-Future<void> _launchDialer(String phoneNumber) async {
+  Future<void> _launchDialer(String phoneNumber) async {
     final Uri telUri = Uri(scheme: 'tel', path: phoneNumber);
     if (await canLaunchUrl(telUri)) {
       await launchUrl(telUri);
@@ -61,7 +104,7 @@ Future<void> _launchDialer(String phoneNumber) async {
   }
 
   // Ensure all async calls are awaited and error-handled.
-Future<void> _launchMap(String url) async {
+  Future<void> _launchMap(String url) async {
     await launchUrl(Uri.parse(url));
   }
 
@@ -74,7 +117,7 @@ Future<void> _launchMap(String url) async {
 
   @override
   // Consider using const wherever possible to optimize performance.
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Links'),
@@ -132,7 +175,8 @@ Widget build(BuildContext context) {
                       ),
                     ),
                     ...academicLinks.map((link) {
-                      if (link.containsKey('action') && link['action'] == 'email') {
+                      if (link.containsKey('action') &&
+                          link['action'] == 'email') {
                         return ListTile(
                           title: Text(link['title']!),
                           trailing: Icon(Icons.mail),
@@ -161,7 +205,8 @@ Widget build(BuildContext context) {
                       if (link.containsKey('subItems')) {
                         return ExpansionTile(
                           title: Text(link['title']),
-                          children: (link['subItems'] as List).map<Widget>((subLink) {
+                          children:
+                              (link['subItems'] as List).map<Widget>((subLink) {
                             return ListTile(
                               title: Text(subLink['title']),
                               trailing: Icon(Icons.arrow_forward),
