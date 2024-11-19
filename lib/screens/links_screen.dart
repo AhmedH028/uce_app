@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
-import 'webview_screen.dart';
+import 'webview_screen.dart'; // Ensure this is the InAppWebView implementation
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/services.dart';
 
-// Ensure this class has a single responsibility.
 class LinksScreen extends StatefulWidget {
   @override
   _LinksScreenState createState() => _LinksScreenState();
 }
 
-// Ensure this class has a single responsibility.
 class _LinksScreenState extends State<LinksScreen> {
   String selectedSection = 'none';
 
   final List<Map<String, String>> academicLinks = [
     {
       'title': 'University Portal',
-      'url':
-          'https://upeisis.uofcanada.edu.eg/PowerCampusSelfService/Home/LogIn'
+      'url': 'https://upeisis.uofcanada.edu.eg/PowerCampusSelfService/Home/LogIn'
     },
     {'title': 'Library Resources', 'url': 'https://library.upei.ca/'},
     {
       'title': 'Quizzes',
-      'url':
-          'https://upeisis.uofcanada.edu.eg/PowerCampusSelfService/Home/LogIn'
+      'url': 'https://upeisis.uofcanada.edu.eg/PowerCampusSelfService/Home/LogIn'
     },
     {
       'title': 'Helpdesk Email',
@@ -35,21 +30,18 @@ class _LinksScreenState extends State<LinksScreen> {
     {
       'title': 'Study Rooms Booking',
       'url':
-          'https://outlook.office365.com/book/StudyRoomBooking@uofcanada.edu.eg/'
+      'https://outlook.office365.com/book/StudyRoomBooking@uofcanada.edu.eg/'
     },
     {
       'title': 'Academic Calendar',
       'url':
-          'https://canwellnet.sharepoint.com/sites/UCEDL/IT%20Policies%20and%20Procedures/Forms/AllItems.aspx?id=%2Fsites%2FUCEDL%2FIT%20Policies%20and%20Procedures%2FAcademic%2FUPEI%20Cairo%20Campus%20Policies%20%26%20Procedures%2FCalendar%20Dates%202024%2E07%2E17%2Epdf&parent=%2Fsites%2FUCEDL%2FIT%20Policies%20and%20Procedures%2FAcademic%2FUPEI%20Cairo%20Campus%20Policies%20%26%20Procedures&p=true&ga=1'
+      'https://canwellnet.sharepoint.com/sites/UCEDL/IT%20Policies%20and%20Procedures/Forms/AllItems.aspx?id=%2Fsites%2FUCEDL%2FIT%20Policies%20and%20Procedures%2FAcademic%2FUPEI%20Cairo%20Campus%20Policies%20%26%20Procedures%2FCalendar%20Dates%202024%2E07%2E17%2Epdf&parent=%2Fsites%2FUCEDL%2FIT%20Policies%20and%20Procedures%2FAcademic%2FUPEI%20Cairo%20Campus%20Policies%20%26%20Procedures&p=true&ga=1'
     },
-    {
-      'title': 'Townhall',
-      'url': 'https://canwellnet.sharepoint.com/sites/UCEDL'
-    },
+    {'title': 'Townhall', 'url': 'https://canwellnet.sharepoint.com/sites/UCEDL'},
     {
       'title': 'Policies',
       'url':
-          'https://canwellnet.sharepoint.com/sites/UCEDL/IT%20Policies%20and%20Procedures/Forms/AllItems.aspx'
+      'https://canwellnet.sharepoint.com/sites/UCEDL/IT%20Policies%20and%20Procedures/Forms/AllItems.aspx'
     },
   ];
 
@@ -60,19 +52,19 @@ class _LinksScreenState extends State<LinksScreen> {
         {
           'title': 'Yoga',
           'url':
-              'https://outlook.office365.com/book/GYMCLASSES@uofcanada.edu.eg/s/oYB9QuuJokeCGLZH09q75w2'
+          'https://outlook.office365.com/book/GYMCLASSES@uofcanada.edu.eg/s/oYB9QuuJokeCGLZH09q75w2'
         },
         {
           'title': 'Boxing',
           'url':
-              'https://outlook.office365.com/owa/calendar/GYMCLASSES@uofcanada.edu.eg/bookings/s/Dh_peETTIEapfnwAEfFdOA2'
+          'https://outlook.office365.com/owa/calendar/GYMCLASSES@uofcanada.edu.eg/bookings/s/Dh_peETTIEapfnwAEfFdOA2'
         },
       ]
     },
     {
       'title': 'Bus Routes and Schedule',
       'url':
-          'https://canwellnet-my.sharepoint.com/:b:/g/personal/ahmed_gad_uofcanada_edu_eg/EYlmlYbMstNEhoh613rmvxUB1UVvBm4jOu2wdO4TQNjV6Q?e=OScw56'
+      'https://canwellnet-my.sharepoint.com/:b:/g/personal/ahmed_gad_uofcanada_edu_eg/EYlmlYbMstNEhoh613rmvxUB1UVvBm4jOu2wdO4TQNjV6Q?e=OScw56'
     },
     {'title': 'Fleet Manager', 'action': 'call', 'phone': '01008470311'},
     {
@@ -82,7 +74,6 @@ class _LinksScreenState extends State<LinksScreen> {
     },
   ];
 
-  // Ensure all async calls are awaited and error-handled.
   Future<void> _launchEmail(String email) async {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
@@ -91,7 +82,6 @@ class _LinksScreenState extends State<LinksScreen> {
     await launchUrl(emailLaunchUri);
   }
 
-  // Ensure all async calls are awaited and error-handled.
   Future<void> _launchDialer(String phoneNumber) async {
     final Uri telUri = Uri(scheme: 'tel', path: phoneNumber);
     if (await canLaunchUrl(telUri)) {
@@ -103,7 +93,6 @@ class _LinksScreenState extends State<LinksScreen> {
     }
   }
 
-  // Ensure all async calls are awaited and error-handled.
   Future<void> _launchMap(String url) async {
     await launchUrl(Uri.parse(url));
   }
@@ -111,12 +100,13 @@ class _LinksScreenState extends State<LinksScreen> {
   void _openWebView(String url) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => WebViewScreen(url: url)),
+      MaterialPageRoute(
+        builder: (context) => WebViewScreen(url: url),
+      ),
     );
   }
 
   @override
-  // Consider using const wherever possible to optimize performance.
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -175,8 +165,7 @@ class _LinksScreenState extends State<LinksScreen> {
                       ),
                     ),
                     ...academicLinks.map((link) {
-                      if (link.containsKey('action') &&
-                          link['action'] == 'email') {
+                      if (link.containsKey('action') && link['action'] == 'email') {
                         return ListTile(
                           title: Text(link['title']!),
                           trailing: Icon(Icons.mail),
@@ -205,8 +194,7 @@ class _LinksScreenState extends State<LinksScreen> {
                       if (link.containsKey('subItems')) {
                         return ExpansionTile(
                           title: Text(link['title']),
-                          children:
-                              (link['subItems'] as List).map<Widget>((subLink) {
+                          children: (link['subItems'] as List).map<Widget>((subLink) {
                             return ListTile(
                               title: Text(subLink['title']),
                               trailing: Icon(Icons.arrow_forward),

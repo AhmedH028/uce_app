@@ -1,72 +1,70 @@
-// File: /mnt/data/webview_screen.dart
-// Description: Dart file for managing specific functionality in the application.
-// Suggestions: Ensure modularity, error handling, and clean coding practices.
-// Updated as per recommendations by Abdalla Fayez
-
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-// Ensure this class has a single responsibility.
 class WebViewScreen extends StatefulWidget {
   final String url;
 
-  const WebViewScreen({super.key, required this.url});
+  WebViewScreen({required this.url});
 
   @override
-  State<WebViewScreen> createState() => _WebViewScreenState();
+  _WebViewScreenState createState() => _WebViewScreenState();
 }
 
-// Ensure this class has a single responsibility.
 class _WebViewScreenState extends State<WebViewScreen> {
-  late final WebViewController _controller;
-  bool _isLoading = true;
+  late InAppWebViewController webViewController;
+  bool isLoading = true;
 
   @override
-  void initState() {
-    super.initState();
-
-    // Initialize WebViewController
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted) // Enable JavaScript
-      ..loadRequest(Uri.parse(widget.url)); // Load the initial URL
-  }
-
-  @override
-  // Consider using const wherever possible to optimize performance.
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('WebView Page'),
+        title: Text('WebView Page'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () async {
-              if (await _controller.canGoBack()) {
-                _controller.goBack();
-              }
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.arrow_forward),
-            onPressed: () async {
-              if (await _controller.canGoForward()) {
-                _controller.goForward();
-              }
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: Icon(Icons.refresh),
             onPressed: () {
-              _controller.reload();
+              webViewController.reload();
             },
           ),
         ],
       ),
       body: Stack(
         children: [
-          WebViewWidget(controller: _controller),
-          if (_isLoading)
-            const Center(
+          InAppWebView(
+            initialUrlRequest: URLRequest(
+              url: WebUri.uri(Uri.parse(widget.url)), // Use WebUri.uri here
+            ),
+            initialOptions: InAppWebViewGroupOptions(
+              crossPlatform: InAppWebViewOptions(
+                useShouldOverrideUrlLoading: true,
+                javaScriptEnabled: true,
+                cacheEnabled: true,
+              ),
+            ),
+            onWebViewCreated: (controller) {
+              webViewController = controller;
+            },
+            onLoadStart: (controller, url) {
+              setState(() {
+                isLoading = true;
+              });
+            },
+            onLoadStop: (controller, url) async {
+              setState(() {
+                isLoading = false;
+              });
+            },
+            onLoadError: (controller, url, code, message) {
+              setState(() {
+                isLoading = false;
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Failed to load page: $message')),
+              );
+            },
+          ),
+          if (isLoading)
+            Center(
               child: CircularProgressIndicator(),
             ),
         ],

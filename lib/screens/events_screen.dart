@@ -2,13 +2,11 @@
 import 'package:flutter/material.dart';
 import 'webview_screen.dart';
 
-// Ensure this class has a single responsibility.
 class EventsScreen extends StatelessWidget {
   const EventsScreen({super.key});
 
   @override
-  // Consider using const wherever possible to optimize performance.
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Events'),
@@ -16,8 +14,7 @@ Widget build(BuildContext context) {
       body: Column(
         children: [
           Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -26,7 +23,14 @@ Widget build(BuildContext context) {
                     IconButton(
                       icon: const Icon(Icons.event, size: 30),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/microsoftEvents');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WebViewScreen(
+                              url: 'https://microsoft.com/events', // Replace with the correct Microsoft Events URL
+                            ),
+                          ),
+                        );
                       },
                       tooltip: 'Microsoft Events',
                     ),
@@ -41,9 +45,8 @@ Widget build(BuildContext context) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const WebViewScreen(
-                              url:
-                                  'https://uofcanada.edu.eg/', // Replace with actual SIS URL
+                            builder: (context) => WebViewScreen(
+                              url: 'https://upeisis.uofcanada.edu.eg/PowerCampusSelfService/Home/LogIn', // Replace with the actual SIS URL
                             ),
                           ),
                         );
@@ -56,15 +59,13 @@ Widget build(BuildContext context) {
                 Column(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.health_and_safety,
-                          size: 30), // Wellness icon
+                      icon: const Icon(Icons.health_and_safety, size: 30), // Wellness icon
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const WebViewScreen(
-                              url:
-                                  'https://outlook.office365.com/owa/calendar/WellnessBookings@microsoft.com/bookings/', // Replace with actual Microsoft Booking URL
+                            builder: (context) => WebViewScreen(
+                              url: 'https://outlook.office365.com/owa/calendar/WellnessBookings@microsoft.com/bookings/', // Replace with the correct Microsoft Booking URL
                             ),
                           ),
                         );
