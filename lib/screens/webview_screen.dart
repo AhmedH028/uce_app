@@ -1,73 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class WebViewScreen extends StatefulWidget {
+class WebViewScreen extends StatelessWidget {
   final String url;
 
-  WebViewScreen({required this.url});
+  const WebViewScreen({required this.url, Key? key}) : super(key: key);
 
-  @override
-  _WebViewScreenState createState() => _WebViewScreenState();
-}
-
-class _WebViewScreenState extends State<WebViewScreen> {
-  late InAppWebViewController webViewController;
-  bool isLoading = true;
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Launch the URL in the default browser
+    _launchUrl(url);
+
+    // Show a message while the link opens
     return Scaffold(
       appBar: AppBar(
-        title: Text('WebView Page'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () {
-              webViewController.reload();
-            },
-          ),
-        ],
+        title: const Text('Opening Link'),
       ),
-      body: Stack(
-        children: [
-          InAppWebView(
-            initialUrlRequest: URLRequest(
-              url: WebUri.uri(Uri.parse(widget.url)), // Use WebUri.uri here
-            ),
-            initialOptions: InAppWebViewGroupOptions(
-              crossPlatform: InAppWebViewOptions(
-                useShouldOverrideUrlLoading: true,
-                javaScriptEnabled: true,
-                cacheEnabled: true,
-              ),
-            ),
-            onWebViewCreated: (controller) {
-              webViewController = controller;
-            },
-            onLoadStart: (controller, url) {
-              setState(() {
-                isLoading = true;
-              });
-            },
-            onLoadStop: (controller, url) async {
-              setState(() {
-                isLoading = false;
-              });
-            },
-            onLoadError: (controller, url, code, message) {
-              setState(() {
-                isLoading = false;
-              });
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Failed to load page: $message')),
-              );
-            },
-          ),
-          if (isLoading)
-            Center(
-              child: CircularProgressIndicator(),
-            ),
-        ],
+      body: const Center(
+        child: Text('Redirecting to browser...'),
       ),
     );
   }

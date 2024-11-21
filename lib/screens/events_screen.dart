@@ -18,6 +18,7 @@ class EventsScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                // Microsoft Events Section
                 Column(
                   children: [
                     IconButton(
@@ -37,6 +38,7 @@ class EventsScreen extends StatelessWidget {
                     const Text('Events'),
                   ],
                 ),
+                // SIS Schedule Section
                 Column(
                   children: [
                     IconButton(
@@ -56,6 +58,7 @@ class EventsScreen extends StatelessWidget {
                     const Text('Schedule'),
                   ],
                 ),
+                // Wellness Booking Section
                 Column(
                   children: [
                     IconButton(
@@ -65,7 +68,7 @@ class EventsScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => WebViewScreen(
-                              url: 'https://outlook.office365.com/owa/calendar/WellnessBookings@microsoft.com/bookings/', // Replace with the correct Microsoft Booking URL
+                              url: 'https://outlook.office365.com/owa/calendar/WellnessBookings@microsoft.com/bookings/', // Correct URL for Wellness Booking
                             ),
                           ),
                         );
@@ -78,9 +81,13 @@ class EventsScreen extends StatelessWidget {
               ],
             ),
           ),
+          // Placeholder for additional event content
           const Expanded(
             child: Center(
-              child: Text('Events content here'),
+              child: Text(
+                'Events content here',
+                style: TextStyle(fontSize: 16),
+              ),
             ),
           ),
         ],

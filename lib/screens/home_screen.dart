@@ -1,8 +1,3 @@
-// File: /mnt/data/home_screen.dart
-// Description: Dart file for managing specific functionality in the application.
-// Suggestions: Ensure modularity, error handling, and clean coding practices.
-// Updated as per recommendations by Abdalla Fayez
-
 import 'package:flutter/material.dart';
 import 'home_content.dart';
 import 'events_screen.dart';
@@ -19,8 +14,8 @@ class HomeScreen extends StatefulWidget {
 // Ensure this class has a single responsibility.
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
-  final List<// Consider using const wherever possible to optimize performance.
-Widget> _screens = [
+  final List< // Consider using const wherever possible to optimize performance.
+      Widget> _screens = [
     HomeContent(),
     EventsScreen(),
     SharePointScreen(),
@@ -29,7 +24,7 @@ Widget> _screens = [
 
   @override
   // Consider using const wherever possible to optimize performance.
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_currentIndex],
       bottomNavigationBar: CustomNavigationBar(

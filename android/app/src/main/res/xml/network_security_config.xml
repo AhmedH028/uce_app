@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">upeisis.uofcanada.edu.eg</domain>
+        <domain includeSubdomains="true">microsoft.com</domain>
+        <domain includeSubdomains="true">outlook.office365.com</domain>
+        <domain includeSubdomains="true">your-custom-domain.com</domain> <!-- Add any other domain -->
+    </domain-config>
+</network-security-config>
